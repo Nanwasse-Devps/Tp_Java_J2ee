@@ -1,5 +1,11 @@
-package beans;
+package fr.unilasalle.flight.api.beans;
 
+import fr.unilasalle.flight.api.beans.Passagers;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,19 +18,17 @@ import lombok.Setter;
 @Table(name = "reservations")
 public class Reservations {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator( name ="reservationsSequence", sequenceName = "reservationsSequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "reservationsSequence")
     private Integer id;
 
-    @Column(name = "flight_id", nullable = false)
-    private Integer flightId;
+    @ManyToOne
+    @JoinColumn(name = "flight_id", referencedColumnName = "id", nullable = false)
+    private Flights flight;
 
-    @Column(name = "passenger_id", nullable = false)
-    private Integer passengerId;
-
-    public Reservations(Integer flightId, Integer passengerId) {
-        this.flightId = flightId;
-        this.passengerId = passengerId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "passenger_id", referencedColumnName = "id", nullable = false)
+    private Passagers passager;
 
     // Getters et setters doive être générés par Lombok
 }

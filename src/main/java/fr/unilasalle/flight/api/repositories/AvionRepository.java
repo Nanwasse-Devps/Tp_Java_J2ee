@@ -1,31 +1,21 @@
-package repositories;
+package fr.unilasalle.flight.api.repositories;
 
-
-import beans.Avion;
+import fr.unilasalle.flight.api.beans.Avion;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.inject.Model;
 
-import javax.enterprise.context.ApplicationScoped;
+import java.util.List;
 
 @Model
 public class AvionRepository implements PanacheRepositoryBase<Avion, Long> {
-   // je peux maintenant faire ce que je veux les méthodes panachees
 
-
-    public  void  ggbhn (){
-        this.deleteAll();
+    public void deleteAllAvions() {
+        deleteAll();
     }
 
-    public  List<Avion> finfByOperator(String operatorParametre){
+    public List<Avion> findByOperator(String operatorParametre) {
         return find("operator", operatorParametre).list();
     }
-
-    public  void machin()[
-            this.find()
-     recuper tou les aavion en fonction du farbrican
-            recuper un avion par sa clé primaire
-
-    toute les opération du crud
 
 
 }
